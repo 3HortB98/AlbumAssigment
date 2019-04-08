@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+        <import type="java.lang.Integer"/>
         <variable
             name="album"
             type="com.example.albumapi.data.AlbumResponse"/>
@@ -23,7 +24,7 @@ android:orientation="vertical">
             android:layout_height="wrap_content"
             android:id="@+id/tvId"
             android:textSize="15sp"
-            android:text="@{album.id}"
+            android:text="@{Integer.toString(album.id)}"
             tools:text="ID"/>
     <TextView
             android:layout_marginStart="20dp"
@@ -40,7 +41,7 @@ android:orientation="vertical">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvUserID"
-            android:text="@{album.userId}"
+            android:text="@{Integer.toString(album.userId)}"
             android:textSize="20sp"
             tools:text="UserID"/>
 

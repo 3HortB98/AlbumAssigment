@@ -32,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
                 .inject(this);
 
         binding.setProgressVisibility(homeViewModel.getProgressObservable());
-
         AlbumAdapter albumAdapter = new AlbumAdapter();
         binding.rvAlbums.setLayoutManager(new LinearLayoutManager(this));
         binding.rvAlbums.setAdapter(albumAdapter);
 
+
         homeViewModel.getAlbumObservable().observe(this, albumAdapter::setData);
+        homeViewModel.getAlbums();
 
     }
 }
