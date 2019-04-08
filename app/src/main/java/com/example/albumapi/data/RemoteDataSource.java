@@ -4,6 +4,7 @@ import com.example.albumapi.net.AlbumService;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 public class RemoteDataSource implements DataSource {

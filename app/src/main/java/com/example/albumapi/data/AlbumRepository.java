@@ -2,6 +2,7 @@ package com.example.albumapi.data;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 public class AlbumRepository implements DataSource {
@@ -16,7 +17,9 @@ public class AlbumRepository implements DataSource {
 
     @Override
     public Single<List<AlbumResponse>> getAlbumResults() {
-        return remoteDataSource.getAlbumResults();
+        return remoteDataSource.getAlbumResults()
+                .doOnSuccess(results->itemLoop(results))
+                .onErrorResumeNext(localDataSource.getAlbumResults());
     }
 
     @Override
@@ -24,4 +27,12 @@ public class AlbumRepository implements DataSource {
         localDataSource.addAlbum(albumResponse);
 
     }
+    private void itemLoop(List<AlbumResponse> albumResponses){
+        for (AlbumResponse album:albumResponses) {
+            addAlbum(album);
+        }
+
+    }
+
+
 }

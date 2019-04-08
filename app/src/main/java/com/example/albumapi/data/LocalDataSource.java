@@ -2,6 +2,7 @@ package com.example.albumapi.data;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 public class LocalDataSource implements DataSource {
@@ -13,7 +14,7 @@ public class LocalDataSource implements DataSource {
 
     @Override
     public Single<List<AlbumResponse>> getAlbumResults() {
-        return null;
+        return albumDatabase.albumDAO().getAlbums();
     }
 
     @Override

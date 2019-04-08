@@ -9,12 +9,13 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 @Dao
 public interface AlbumDAO {
 
     @Query("SELECT * FROM albums")
-    Maybe<List<AlbumResponse>> getAlbums();
+    Single<List<AlbumResponse>> getAlbums();
 
     @Insert
     void addAlbum(AlbumResponse albumResponse);

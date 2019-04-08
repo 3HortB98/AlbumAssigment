@@ -1,7 +1,10 @@
 package com.example.albumapi.DI;
 
 import android.app.Application;
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
+import android.arch.persistence.room.migration.Migration;
+import android.support.annotation.NonNull;
 
 import com.example.albumapi.Constants;
 import com.example.albumapi.data.AlbumDatabase;
@@ -20,6 +23,7 @@ public class DatabaseModule {
     @Singleton
     public AlbumDatabase providesAlbumDatabase(Application application){
         return Room.databaseBuilder(application, AlbumDatabase.class, Constants.DATABASE_NAME)
+                .addMigrations(MIGRATION_1_2)
                 .build();
     }
 
@@ -29,4 +33,11 @@ public class DatabaseModule {
     public DataSource provideLocalDatabase(AlbumDatabase albumDatabase){
         return new LocalDataSource(albumDatabase);
     }
+
+    static final Migration MIGRATION_1_2 = new Migration(1,2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+
+        }
+    };
 }
